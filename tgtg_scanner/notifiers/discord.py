@@ -88,8 +88,11 @@ class Discord(Notifier):
         if not self.disable_commands:
             # Commands are handled separately, in case commands are not enabled
             self._setup_commands()
-        asyncio.run(self.bot.start(self.token))
-        self.bot.http.connector.close()
+        asyncio.run(self._start_bot())
+
+    async def _start_bot(self):
+        async with self.bot:
+            await self.bot.start(self.token)
 
     def _setup_events(self):
         @self.bot.event

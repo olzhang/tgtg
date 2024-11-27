@@ -62,7 +62,6 @@ class Scanner:
             polling_wait_time=self.config.tgtg.polling_wait_time,
             access_token=self.config.tgtg.access_token,
             refresh_token=self.config.tgtg.refresh_token,
-            user_id=self.config.tgtg.user_id,
             datadome_cookie=self.config.tgtg.datadome,
             base_url=self.config.tgtg.base_url,
         )
@@ -79,7 +78,7 @@ class Scanner:
             return items[0]
         items = sorted(
             [
-                Item(item, self.location)
+                Item(item, self.location, self.config.locale)
                 for item in self.tgtg_client.get_items(favorites_only=False, latitude=53.5511, longitude=9.9937, radius=50)
             ],
             key=lambda x: x.items_available,
@@ -100,7 +99,7 @@ class Scanner:
             try:
                 if item_id != "":
                     item_dict = self.tgtg_client.get_item(item_id)
-                    items.append(Item(item_dict, self.location))
+                    items.append(Item(item_dict, self.location, self.config.locale))
             except TgtgAPIError as err:
                 log.error(err)
         items += self._get_favorites()
@@ -117,7 +116,6 @@ class Scanner:
         self.config.save_tokens(
             self.tgtg_client.access_token,
             self.tgtg_client.refresh_token,
-            self.tgtg_client.user_id,
             self.tgtg_client.datadome_cookie,
         )
 
@@ -133,7 +131,7 @@ class Scanner:
         except TgtgAPIError as err:
             log.error(err)
             return []
-        return [Item(item, self.location) for item in items]
+        return [Item(item, self.location, self.config.locale) for item in items]
 
     def _check_item(self, item: Item) -> None:
         """
@@ -174,7 +172,6 @@ class Scanner:
         self.config.save_tokens(
             self.tgtg_client.access_token,
             self.tgtg_client.refresh_token,
-            self.tgtg_client.user_id,
             self.tgtg_client.datadome_cookie,
         )
         # activate location service

@@ -71,7 +71,7 @@ You can combine multiple crons as semicolon separated list.
 | ScheduleCron | SCHEDULE_CRON | run only on schedule | `* * * * *` |
 | ItemIDs | ITEM_IDS | **Depreciated!** comma-separated list of additional (none favorite) items to scan | |
 | Metrics | METRICS | enable Prometheus metrics HTTP server | `false` |
-| MetricsPort | METRICS_PORTS | port for metrics server | `8000` |
+| MetricsPort | METRICS_PORT | port for metrics server | `8000` |
 | DisableTests | DISABLE_TESTS | disable test notifications on startup | `false` |
 | Quiet | QUIET | minimal console output | `false` |
 | Locale | LOCALE | localization | `en_US` |
@@ -87,7 +87,6 @@ You can combine multiple crons as semicolon separated list.
 | Username | TGTG_USERNAME | email connected to your TGTG Account |  | YES |
 | AccessToken | TGTG_ACCESS_TOKEN | TGTG API access token | | |
 | RefreshToken | TGTG_REFRESH_TOKEN | TGTG API refresh token | | |
-| UserId | TGTG_USER_ID | TGTG API user ID | | |
 | Datadome | TGTG_DATADOME | TGTG API datadome protection cookie | | |
 | Timeout | TGTG_TIMEOUT | timeout for API requests | `60` | |
 | AccessTokenLifetime | TGTG_ACCESS_TOKEN_LIFETIME | access token lifetime in seconds | `14400` | |
